@@ -1,5 +1,0 @@
-"0","## Convert to a format that enables plotting of flow lines between census block centroids"
-"0","de_od_sub_sp <- get_od_spatial(de_od_sub)"
-"2","Using FIPS code '10' for state 'DE'
-"
-"0","de_od_sub_sp[1:2, ]"

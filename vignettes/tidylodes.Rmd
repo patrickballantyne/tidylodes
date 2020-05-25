@@ -177,16 +177,26 @@ The OD datasets are even larger than the WAC and RAC datasets, and mapping these
 ## Get OD data for Delaware State
 de_od <- get_od_data("de", "2014", T)
 ## Subset to flows over 50
-de_od_sub <- get_od_subset(de_od, flow_threshold = 30)
+de_od_sub <- get_od_subset(de_od, flow_threshold = 10)
 ```
 
-```{r warning = FALSE}
+```{r }
 ## Convert to spatial format
 de_od_sub_sp <- get_od_spatial(de_od_sub)
 
-## Plot 
-dplyr::glimpse(de_od_sub_sp)
+## Plot all flows for Delaware State over 10 
+library(ggplot2)
+ggplot(de_od_sub_sp) +
+  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = 'black') +
+  scale_alpha_continuous() +
+  theme(panel.background = element_rect(fill='gray', colour = 'gray'), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
+        axis.title = element_blank(), axis.ticks = element_blank())
 ```
+
+
+
+
 
 ## 6. Contact Details 
 

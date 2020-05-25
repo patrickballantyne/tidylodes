@@ -356,6 +356,7 @@ get_od_subset <- function(df, flow_threshold) {
 get_od_spatial <- function(df) {
 
   ## Stage One - Extracting and formatting the Census Blocks for the state of interest
+  options(tigris_class = "sf")
   state_of_interest <- unique(df$W_StateAbb)
   state_of_interest <- stringr::str_to_upper(state_of_interest)
   blocks <- tigris::blocks(state = state_of_interest)
@@ -368,7 +369,7 @@ get_od_spatial <- function(df) {
   blocks_sf <- sf::st_as_sf(blocks)
   block_centroids <- sf::st_centroid(blocks_sf)
 
-  # Stage Three - Joining centroids coordinates onto the OD data
+  ## Stage Three - Joining centroids coordinates onto the OD data
   df_merge <- merge(df, block_centroids, by.x = c("Workplace_Census_Block_Code", "W_StateID", "W_CountyID", "W_TractID", "W_BlockGroupID", "W_CensusBlockID"),
                     by.y = c("Census_Block_Code", "StateID", "CountyID", "TractID", "BlockGroupID", "CensusBlockID"), all.x = TRUE)
   colnames(df_merge)[24] <- c("W_geometry")
@@ -377,6 +378,11 @@ get_od_spatial <- function(df) {
   colnames(df_merge_2)[26] <- c("R_geometry")
   df_merge_2 <- subset(df_merge_2, select=-c(BlockID.x, BlockID.y))
 
-  return(df_merge_2)
+  ## Stage Four - Formatting geometries
+  df <- dplyr::mutate(df_merge_2, W_lat = unlist(purrr::map(df_merge_2$W_geometry,1)),
+                      W_lon = unlist(purrr::map(df_merge_2$W_geometry,2)), R_lat =  unlist(purrr::map(df_merge_2$R_geometry,1)),
+                      R_lon = unlist(purrr::map(df_merge_2$R_geometry,2)))
+
+  return(df)
 }
 
