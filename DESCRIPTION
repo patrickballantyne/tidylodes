@@ -1,0 +1,28 @@
+Package: tidylodes
+Type: Package
+Title: tidylodes: A package for extracting, processing and 'spatialising' data from the US Census Bureau's LODES database
+Version: 0.1.0
+Author: Patrick Ballantyne <P.J.Ballantyne@liverpool.ac.uk> [aut, cre]
+Description: This package enables users to extract datasets directly from the US Census Bureau's database of Longitudinal
+    Origin-Destination Employment Statistics (LODES). The database contains three different datasets - the first two
+    Workplace Area Characteristics (WAC) and Residential Area Characteristics (RAC) contain estimates of total jobs and
+    jobs in specific sectors (e.g. Retail Trade, Manufacturing). The third dataset, contains OD flows of jobs from 
+    residential areas to workplace areas. This package is novel in that it not only cleans these datasets and improves
+    the recording of census geographies within them, but also converts these datasets to spatial formats that enable 
+    spatial manipulation/analysis to be carried out.
+Imports:
+    data.table,
+    dplyr,
+    R.utils, 
+    sf, 
+    stringr,
+    tigris, 
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+License: CC0
+Encoding: UTF-8
+RoxygenNote: 7.1.0
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

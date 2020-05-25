@@ -1,0 +1,54 @@
+"0","dplyr::glimpse(de_od_sub_sp)
+"
+"1","Observations: 5
+"
+"1","Variables: 24
+"
+"1","$ Residence_Census_Block_Code [3m[38;5;246m<chr>[39m[23m ""100010407002000"", ""100010410002031"", ""100030143003013"", ""100030144032002"", ""100...
+"
+"1","$ R_StateID                   [3m[38;5;246m<chr>[39m[23m ""10"", ""10"", ""10"", ""10"", ""10""
+"
+"1","$ R_CountyID                  [3m[38;5;246m<chr>[39m[23m ""001"", ""001"", ""003"", ""003"", ""005""
+"
+"1","$ R_TractID                   [3m[38;5;246m<chr>[39m[23m ""040700"", ""041000"", ""014300"", ""014403"", ""051004""
+"
+"1","$ R_BlockGroupID              [3m[38;5;246m<chr>[39m[23m ""2"", ""2"", ""3"", ""2"", ""2""
+"
+"1","$ R_CensusBlockID             [3m[38;5;246m<chr>[39m[23m ""000"", ""031"", ""013"", ""002"", ""000""
+"
+"1","$ Workplace_Census_Block_Code [3m[38;5;246m<chr>[39m[23m ""100010433001003"", ""100010405011044"", ""100030145021028"", ""100030145021028"", ""100...
+"
+"1","$ W_StateID                   [3m[38;5;246m<chr>[39m[23m ""10"", ""10"", ""10"", ""10"", ""10""
+"
+"1","$ W_CountyID                  [3m[38;5;246m<chr>[39m[23m ""001"", ""001"", ""003"", ""003"", ""005""
+"
+"1","$ W_TractID                   [3m[38;5;246m<chr>[39m[23m ""043300"", ""040501"", ""014502"", ""014502"", ""050902""
+"
+"1","$ W_BlockGroupID              [3m[38;5;246m<chr>[39m[23m ""1"", ""1"", ""1"", ""1"", ""1""
+"
+"1","$ W_CensusBlockID             [3m[38;5;246m<chr>[39m[23m ""003"", ""044"", ""028"", ""028"", ""027""
+"
+"1","$ W_StateName                 [3m[38;5;246m<chr>[39m[23m ""Delaware"", ""Delaware"", ""Delaware"", ""Delaware"", ""Delaware""
+"
+"1","$ W_StateAbb                  [3m[38;5;246m<chr>[39m[23m ""de"", ""de"", ""de"", ""de"", ""de""
+"
+"1","$ W_CountyName                [3m[38;5;246m<chr>[39m[23m ""Kent County, DE"", ""Kent County, DE"", ""New Castle County, DE"", ""New Castle Count...
+"
+"1","$ W_TractName                 [3m[38;5;246m<chr>[39m[23m ""433 (Kent, DE)"", ""405.01 (Kent, DE)"", ""145.02 (New Castle, DE)"", ""145.02 (New C...
+"
+"1","$ W_BlockGroupName            [3m[38;5;246m<chr>[39m[23m ""1 (Tract 433, Kent, DE)"", ""1 (Tract 405.01, Kent, DE)"", ""1 (Tract 145.02, New C...
+"
+"1","$ R_StateName                 [3m[38;5;246m<chr>[39m[23m ""Delaware"", ""Delaware"", ""Delaware"", ""Delaware"", ""Delaware""
+"
+"1","$ R_CountyName                [3m[38;5;246m<chr>[39m[23m ""Kent County, DE"", ""Kent County, DE"", ""New Castle County, DE"", ""New Castle Count...
+"
+"1","$ R_TractName                 [3m[38;5;246m<chr>[39m[23m ""407 (Kent, DE)"", ""410 (Kent, DE)"", ""143 (New Castle, DE)"", ""144.03 (New Castle,...
+"
+"1","$ R_BlockGroupName            [3m[38;5;246m<chr>[39m[23m ""2 (Tract 407, Kent, DE)"", ""2 (Tract 410, Kent, DE)"", ""3 (Tract 143, New Castle,...
+"
+"1","$ Total_Job_Flows             [3m[38;5;246m<dbl>[39m[23m 34, 32, 54, 79, 33
+"
+"1","$ W_geometry                  [3m[38;5;246m<POINT [Â°]>[39m[23m POINT (-75.55067 39.1911), POINT (-75.53599 39.19285), POINT (-75.74392 3...
+"
+"1","$ R_geometry                  [3m[38;5;246m<POINT [Â°]>[39m[23m POINT (-75.55519 39.17063), POINT (-75.50178 39.1598), POINT (-75.75921 3...
+"

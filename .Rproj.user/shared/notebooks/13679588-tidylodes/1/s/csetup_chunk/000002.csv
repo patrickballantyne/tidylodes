@@ -1,0 +1,11 @@
+"0","## Setup"
+"0","library(tidylodes)"
+"2","
+Attaching package: ‘tidylodes’
+
+"
+"2","The following object is masked _by_ ‘.GlobalEnv’:
+
+    get_jobsector_wac
+
+"

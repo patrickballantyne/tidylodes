@@ -1,0 +1,19 @@
+"0","## Extract WAC data for Delaware, from 2013"
+"0","de_wac <- get_wac_data(""de"", ""2013"")"
+"2","trying URL 'http://lehd.ces.census.gov/data/lodes/LODES7/de/wac/de_wac_S000_JT00_2013.csv.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 138759 bytes (135 KB)
+"
+"2","downloaded 135 KB
+
+"
+"2","trying URL 'http://lehd.ces.census.gov/data/lodes/LODES7/de/de_xwalk.csv.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 563114 bytes (549 KB)
+"
+"2","downloaded 549 KB
+
+"
+"0","de_wac[1:2, ]"
