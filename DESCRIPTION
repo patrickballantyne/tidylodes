@@ -17,7 +17,6 @@ Imports:
     sf, 
     stringr,
     tigris, 
-Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 License: CC0
 Encoding: UTF-8
