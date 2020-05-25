@@ -1,5 +1,0 @@
-"0","## Reduce the dimensionality of de_wac to focus on one job sector - e.g. Retail Trade"
-"0","de_wac_rt <- get_jobsector_wac(de_wac, job_code = ""Retail_Trade"","
-"0","                               job_proportion = T)"
-"2","Error in paste0(Job_Code) : object 'Job_Code' not found
-"
