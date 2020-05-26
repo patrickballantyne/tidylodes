@@ -1,6 +1,12 @@
 ## README for tidylodes
 
-Welcome to tidylodes! In this README the following topics will be covered:
+Welcome to tidylodes! 
+
+"A package for extracting, processing and 'spatialising' data from the US Census Bureau's LODES database"
+
+---
+
+In this README the following topics will be covered:
 
   1. Introduction to the LODES database
   2. Introduction to tidylodes
@@ -24,18 +30,9 @@ The database contains three different datasets:
 
 ## 2. Package Description: 
 
-*tidylodes* enables users to extract datasets directly from LODES at: https://lehd.ces.census.gov/data/lodes/. 
-
-Users of the package can download WAC, RAC and OD datasets for specific states and for specific years, directly to their PC for use locally.
+**tidylodes** enables users to extract datasets directly from LODES at: https://lehd.ces.census.gov/data/lodes/. Users of the package can download WAC, RAC and OD datasets for specific states and for specific years, directly to their PC for use locally.
 
 The package cleans the datasets and improves the recording of census geographies within them. The package also offers users the opportunity to convert these datasets into spatial formats for spatial exploration/manipulation/analysis. It is important to stress that the datasets downloaded with this package contain only information on workplace areas, residence areas or those with valid OD flows, thus not every census block is accounted for. 
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ## 3. Installation
 
