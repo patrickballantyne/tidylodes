@@ -151,7 +151,9 @@ tm_shape(area_of_interest) +
           title = "Retail Trade Jobs", palette = "YlOrRd", n = 5) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
-
+<p align="center">
+  <img width="600" height="600" src="figures/RAC_Choropleth.png">
+</p>
 
 **Plotting OD Flows**
 
