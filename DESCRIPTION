@@ -21,4 +21,4 @@ VignetteBuilder: knitr
 License: CC0
 Encoding: UTF-8
 RoxygenNote: 7.1.0
-VignetteBuilder: knitr
+
