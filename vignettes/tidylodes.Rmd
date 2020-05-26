@@ -171,30 +171,47 @@ tm_shape(area_of_interest) +
 
 **Plotting OD Flows**
 
-The OD datasets are even larger than the WAC and RAC datasets, and mapping these will also take considerable time. To reduce the size of the OD dataset, the get_od_subset() function is used below to extract only job flows of 30 or above, and these are then mapped.
+The OD datasets are even larger than the WAC and RAC datasets, and mapping these will also take considerable time. To reduce the size of the OD dataset, the get_od_subset() function is used below to extract only job flows of 16 or above, and these are then mapped using ggplot. 
+
+- For more information on ggplot() visit: https://cran.r-project.org/web/packages/ggplot2/index.html
 
 ```{r warning = FALSE}
 ## Get OD data for Delaware State
 de_od <- get_od_data("de", "2014", T)
-## Subset to flows over 50
-de_od_sub <- get_od_subset(de_od, flow_threshold = 10)
-```
 
-```{r }
-## Convert to spatial format
+## Get subset (flows > 20)
+de_od_sub <- get_od_subset(de_od, flow_threshold = 8)
+
+## Convert to spatial, for mapping
 de_od_sub_sp <- get_od_spatial(de_od_sub)
 
-## Plot all flows for Delaware State over 10 
+## Plot all flows for Delaware State over 10, using ggplot()
 library(ggplot2)
 ggplot(de_od_sub_sp) +
-  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = 'black') +
+  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = "white") +
   scale_alpha_continuous() +
-  theme(panel.background = element_rect(fill='gray', colour = 'gray'), panel.grid.major = element_blank(),
+  theme(panel.background = element_rect(fill='black', colour = 'black'), panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
 
+Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models, which could be implemented for each year of OD data, for example. 
 
+```{r }
+## Convert the entire OD dataset to spatial format for Delaware
+de_od_sp <- get_od_spatial(de_od)
+
+## Extract flows for one workplace area - this could be substituted for one county, tract or blockgroup?
+de_od_sp_aoi <- de_od_sp[de_od_sp$Workplace_Census_Block_Code == "100010405011044",]
+
+## Plot all flows for Delaware State over 10 
+ggplot(de_od_sp_aoi) +
+  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = "white") +
+  scale_alpha_continuous() +
+  theme(panel.background = element_rect(fill='black', colour = 'black'), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
+        axis.title = element_blank(), axis.ticks = element_blank())
+```
 
 
 
