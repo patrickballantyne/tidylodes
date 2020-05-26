@@ -29,7 +29,7 @@ The package cleans the datasets and improves the recording of census geographies
 
 ```{r}
 ## Install package directly from GitHub
-#devtools::install_github("patrickballantyne/tidylodes")
+devtools::install_github("patrickballantyne/tidylodes")
 ```
 
 
