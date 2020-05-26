@@ -64,25 +64,18 @@ As an example, let's go through how to use the various functions specific to **W
 ```{r}
 ## Extract WAC data for Delaware, from 2013
 de_wac <- get_wac_data("de", "2013")
-de_wac[1:2, ]
 ```
 
 ```{r}
 ## Reduce the dimensionality of de_wac to focus on one job sector - e.g. Retail Trade
 de_wac_rt <- get_jobsector_wac(de_wac, job_code = "Retail_Trade",
                                job_proportion = T)
-de_wac_rt[1:2, ]
 ```
 
 ```{r echo=TRUE, message=TRUE, warning=FALSE, results='hide', fig.keep='all'}
 ## Convert the simple features
 de_wac_rt_sf <- get_wac_spatial(de_wac_rt)
 ```
-
-```{r}
-de_wac_rt_sf[1:2, ]
-```
-
 
 The **WAC** and **RAC** have identical functions, so the above steps can be repeated to obtain LODES data for Residential Areas (RAC) by substituting the wac function as below:
 
@@ -99,19 +92,16 @@ The **OD** datasets have different functions:
 ```{r}
 ## Download OD data for Delaware, from 2013
 de_od <- get_od_data("de", "2013", main = T)
-de_od[1:2, ]
 ```
 
 ```{r}
 ## Subset data to include only those rows of data where flows exceed a certain threshold
 de_od_sub <- get_od_subset(de_od, flow_threshold = 30)
-de_od_sub[1:2, ]
 ```
 
 ```{r warning=FALSE}
 ## Convert to a format that enables plotting of flow lines between census block centroids
 de_od_sub_sp <- get_od_spatial(de_od_sub)
-de_od_sub_sp[1:2, ]
 ```
 
 ## 5. Example Applications
