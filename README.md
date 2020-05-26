@@ -6,15 +6,6 @@ Welcome to tidylodes!
 
 ---
 
-In this README the following topics will be covered:
-
-  1. Introduction to the LODES database
-  2. Introduction to tidylodes
-  3. Installation of tidylodes
-  4. Using tidylodes - function examples, function help
-  5. Suggested applications - Choropleth maps with WAC/RAC data and OD Flow Maps
-  6. Contact Details
-
 ## 1. LODES Introduction 
 
 LEHD Origin-Destination Employment Statistics or **LODES** is a dataset made available by the Longitudinal Employer-Household Dynamics (LEHD) program, part of the Centre for Economic Studies at the U.S. Census Bureau. This package uses Version 7 of LODES which has been enumerated by the 2010 Census Blocks.
