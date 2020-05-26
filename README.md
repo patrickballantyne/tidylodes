@@ -160,7 +160,7 @@ tm_shape(area_of_interest) +
 ```
 
   <p align="center">
-  <img width="500" height="600" src="figures/RAC_Choropleth.png">
+  <img width="600" height="600" src="figures/RAC_Choropleth.png">
 </p>
 
 
