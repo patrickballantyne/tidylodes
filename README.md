@@ -152,7 +152,7 @@ tm_shape(area_of_interest) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
 <p align="center">
-  <img width="600" height="600" src="figures/RAC_Choropleth.png">
+  <img width="350" height="600" src="figures/RAC_Choropleth.png">
 </p>
 
 **Plotting OD Flows**
