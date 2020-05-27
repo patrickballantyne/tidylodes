@@ -25,13 +25,6 @@ Users of the package can download WAC, RAC and OD datasets for specific states a
 
 The package cleans the datasets and improves the recording of census geographies within them. The package also offers users the opportunity to convert these datasets into spatial formats for spatial exploration/manipulation/analysis. It is important to stress that the datasets downloaded with this package contain only information on workplace areas, residence areas or those with valid OD flows, thus not every census block is accounted for. 
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ## 3. Installation
 
 ```{r}
@@ -161,7 +154,7 @@ tm_shape(area_of_interest) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
    <p align="center">
-  <img width="600" height="600" src="figures/RAC_Choropleth.png">
+  <img width="450" height="450" src="figures/RAC_Choropleth.png">
 </p>
 
 **Plotting OD Flows**
@@ -230,7 +223,7 @@ tm_shape(de_lines) +
   tm_lines()
 ```
    <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_tmap.png">
+  <img width="850" height="850" src="figures/Delaware_OD_tmap.png">
 </p>
 
 So for plotting of the lines only, this option is the best! Especially when you integrate tm_lines() with other features, see below:
