@@ -182,6 +182,11 @@ ggplot(de_od_sub_sp) +
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
 
+
+  <p align="center">
+  <img width="600" height="600" src="figures/Delaware_OD_Flows.png">
+</p>
+
 Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models.
 
 ```{r }
@@ -197,7 +202,9 @@ ggplot(de_od_sp_aoi) +
         panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
-
+  <p align="center">
+  <img width="600" height="600" src="figures/Delaware_OD_Flows_OneBlock.png">
+</p>
 
 
 ## 6. Contact Details 
