@@ -25,7 +25,6 @@ Users of the package can download WAC, RAC and OD datasets for specific states a
 
 The package cleans the datasets and improves the recording of census geographies within them. The package also offers users the opportunity to convert these datasets into spatial formats for spatial exploration/manipulation/analysis. It is important to stress that the datasets downloaded with this package contain only information on workplace areas, residence areas or those with valid OD flows, thus not every census block is accounted for. 
 
-
 ## 3. Installation
 
 ```{r}
@@ -154,8 +153,7 @@ tm_shape(area_of_interest) +
           title = "Retail Trade Jobs", palette = "Greys", n = 5) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
-
-  <p align="center">
+   <p align="left">
   <img width="600" height="600" src="figures/RAC_Choropleth.png">
 </p>
 
@@ -168,7 +166,7 @@ The OD datasets are even larger than the WAC and RAC datasets, and mapping these
 ```{r warning = FALSE}
 ## Get OD data for Delaware State
 de_od <- get_od_data("de", "2014", T)
-## Get subset (flows > 20)
+## Get subset (flows > 8 )
 de_od_sub <- get_od_subset(de_od, flow_threshold = 8)
 ## Convert to spatial, for mapping
 de_od_sub_sp <- get_od_spatial(de_od_sub)
@@ -181,10 +179,8 @@ ggplot(de_od_sub_sp) +
         panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
-
-
-  <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_Flows.png">
+   <p align="left">
+  <img width="600" height="600" src="figures/Delaware_OD_ggplot.png">
 </p>
 
 Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models.
@@ -202,10 +198,67 @@ ggplot(de_od_sp_aoi) +
         panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
-  <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_Flows_OneBlock.png">
+   <p align="left">
+  <img width="600" height="600" src="figures/Delaware_OD_OneBlock.png">
 </p>
 
+However, it would make more sense for plotting of the OD data to be able to use tmap, to enable supporting layers (polygons, basemaps) to be incorporated. To do this, the lines parameter in the get_od_data() function can be set to T, which will instead return a multilinestring object that can be plotted much easier. See below:
+
+```{r}
+# Reobtain Delaware OD data
+de_od <- get_od_data("de", "2017")
+# Again, only flows greater than 8
+de_od_sub <- get_od_subset(de_od, flow_threshold = 8)
+# Convert to spatial format, but set lines to T to get multilinestring object
+de_lines <- get_od_spatial(de_od_sub, lines = T)
+# Examine
+de_lines
+```
+
+Now that the OD data has been converted to a multilinestring format, it can be plotted easily using tmap: 
+
+```{r}
+# Now plot the lines
+tm_shape(de_lines) +
+  tm_lines()
+```
+
+
+
+   <p align="left">
+  <img width="600" height="600" src="figures/Delaware_OD_tmap.png">
+</p>
+
+
+
+
+So for plotting of the lines only, this option is the best! Especially when you integrate tm_lines() with other features, see below:
+
+```{r}
+# Download a shapefile of Delaware Tracts from Tigris
+de_tracts <- tigris::tracts("de")
+# Plot the Delaware tracts and OD data together
+tm_shape(de_tracts) +
+  tm_polygons(col = "white", border.col = "grey", border.alpha = 0.5) +
+  tm_shape(de_lines) +
+  tm_lines(col = "black", alpha = 0.75) +
+  tm_layout(frame = F)
+```
+
+
+
+
+   <p align="left">
+  <img width="600" height="600" src="figures/Delaware_OD_tmap_tigris.png">
+</p>
+
+
+
+
+
+
+
+So using the linestrings makes it very easy to plot the OD flows, and create effective visualisations by integrating other spatial features. However, always keep in mind that setting (lines = T) will only return the multilinestring object, not the OD data itself. 
 
 ## 6. Contact Details 
 
