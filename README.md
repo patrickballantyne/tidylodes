@@ -157,7 +157,7 @@ tm_shape(area_of_interest) +
 
     <p align = "centre">
     <imd width = "600" height = "600" src = "figures/RAC_Choropleth.png" >
-  </p>
+    </p>
 
 **Plotting OD Flows**
 
