@@ -8,14 +8,9 @@ vignette: >
 ---
 ## README for tidylodes
 
-Welcome to tidylodes! In this README the following topics will be covered:
+Welcome to tidylodes! 
 
-  1. Introduction to the LODES database
-  2. Introduction to tidylodes
-  3. Installation of tidylodes
-  4. Using tidylodes - function examples, function help
-  5. Suggested applications - Choropleth maps with WAC/RAC data and OD Flow Maps
-  6. Contact Details
+An R package for extracting, processing and 'spatialising' data from the US Census Bureau's LODES database
 
 ## 1. LODES Introduction 
 
@@ -52,6 +47,16 @@ knitr::opts_chunk$set(
 #devtools::install_github("patrickballantyne/tidylodes")
 ```
 
+The package has a number of dependencies, please ensure you have a version of R equal to or greater than 3.5.0, and that you have each of the packages below installed, and at a version equal to or greater than those below:
+
+| Package         | Version       | 
+| ----------------|--------------:| 
+| R.utils         | (>= 2.6.0)    | 
+| data.table      | (>= 1.12.2)   |
+| stringr         | (>= 1.4.0)    |
+| dplyr           | (>= 0.8.5)    |
+| tigris          | (>- 0.9.4)    |
+| sf              | (>= 0.8.1)    |
 
 
 ## 4. Usage 
@@ -68,7 +73,7 @@ Each dataset (WAC, RAC and OD) has its own set of functions that can be used to 
 ls("package:tidylodes")
 ```
 
-To view the help associated each function type the following:
+To view the help associated a tidylodes function type the following:
 
 ```{r}
 # Get function help
@@ -77,7 +82,7 @@ To view the help associated each function type the following:
 
 ### Function Examples
 
-#### WAC / RAC
+#### WAC / RAC Data
 
 As an example, let's go through how to use the various functions specific to **WAC** data:
 
@@ -95,16 +100,13 @@ de_wac_rt[1:2, ]
 ```
 
 ```{r echo=TRUE, message=TRUE, warning=FALSE, results='hide', fig.keep='all'}
-## Convert the simple features
+## Convert to simple features format
 de_wac_rt_sf <- get_wac_spatial(de_wac_rt)
-```
-
-```{r}
 de_wac_rt_sf[1:2, ]
 ```
 
 
-The **WAC** and **RAC** have identical functions, so the above steps can be repeated to obtain LODES data for Residential Areas (RAC) by substituting the wac function as below:
+The **WAC** and **RAC** datasets have identical functions, so the above steps can be repeated to obtain LODES data for Residential Areas (RAC) by substituting the corresponding wac functions as below:
 
 | Function Purpose                | WAC                   | RAC                 |
 | --------------------------------|:---------------------:| -------------------:|
@@ -112,7 +114,7 @@ The **WAC** and **RAC** have identical functions, so the above steps can be repe
 | Subset to specific job sector   | *get_jobsector_wac*   | *get_jobsector_rac* |
 | Convert to spatial format       | *get_wac_spatial*     | *get_rac_spatial*   |
 
-#### OD
+#### Origin-Destination (OD) Data
 
 The **OD** datasets have different functions:
 
@@ -145,7 +147,7 @@ vt_rac <- get_rac_data("vt", "2017")
 vt_rac_sf <- get_rac_spatial(vt_rac)
 ```
 
-These WAC/RAC datasets are large, and mapping these will take considerable time. However, the nature of converting WAC/RAC to sf means that they become easy to manipulate using the tidyverse, so areas of particular interest can be selected (e.g. specific tracts), and then mapped using tmap.
+These WAC/RAC datasets are large, and mapping these will take considerable time. However, the nature of converting WAC/RAC to sf means that they become easy to manipulate using the tidyverse (v. >= 1.3.0), so areas of particular interest can be selected (e.g. specific tracts), and then mapped using tmap (v. >= 2.2).
 
 For more information on the packages used below, visit:
 
@@ -164,7 +166,7 @@ area_of_interest <- vt_rac_sf %>%
 ## Map 
 tm_shape(area_of_interest) +
   tm_fill(col = "Retail_Trade", style = "jenks",
-          title = "Retail Trade Jobs", palette = "YlOrRd", n = 5) +
+          title = "Retail Trade Jobs", palette = "Greys", n = 5) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
 
@@ -195,7 +197,7 @@ ggplot(de_od_sub_sp) +
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
 
-Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models, which could be implemented for each year of OD data, for example. 
+Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models.
 
 ```{r }
 ## Convert the entire OD dataset to spatial format for Delaware
