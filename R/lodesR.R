@@ -394,7 +394,7 @@ get_od_spatial <- function(df, lines = F) {
 
     r_geometry <- df[, c("R_geometry")]
     r_geometry <- sf::st_as_sf(r_geometry)
-    r_geometry_mt <- st_coordinates(r_geometry)
+    r_geometry_mt <- sf::st_coordinates(r_geometry)
 
     linestring <- sf::st_multilinestring(x = list(w_geometry_mt, r_geometry_mt))
     linestring <- sf::st_sf(geom = st_sfc(linestring))
