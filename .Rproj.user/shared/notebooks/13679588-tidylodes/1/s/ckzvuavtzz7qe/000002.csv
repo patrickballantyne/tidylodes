@@ -1,3 +1,0 @@
-"0","## Subset data to include only those rows of data where flows exceed a certain threshold"
-"0","de_od_sub <- get_od_subset(de_od, flow_threshold = 30)"
-"0","de_od_sub[1:2, ]"

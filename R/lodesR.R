@@ -353,7 +353,7 @@ get_od_subset <- function(df, flow_threshold) {
 #######################################################################################################################
 ## Function 3b. Function that allows conversion of cleaned OD data to a dataframe with two sets of coordinates (workplace/residence)
 ### for easy plotting of linestrings between them
-get_od_spatial <- function(df) {
+get_od_spatial <- function(df, lines = F) {
 
   ## Stage One - Extracting and formatting the Census Blocks for the state of interest
   options(tigris_class = "sf")
@@ -383,6 +383,24 @@ get_od_spatial <- function(df) {
                       W_lon = unlist(purrr::map(df_merge_2$W_geometry,2)), R_lat =  unlist(purrr::map(df_merge_2$R_geometry,1)),
                       R_lon = unlist(purrr::map(df_merge_2$R_geometry,2)))
 
-  return(df)
-}
+  ## Stage Five - Converting to linestrings
+  if(lines == F) {
+    return(df)}
+  else {
 
+    w_geometry <- df[, c("W_geometry")]
+    w_geometry <- sf::st_as_sf(w_geometry)
+    w_geometry_mt <- st_coordinates(w_geometry)
+
+    r_geometry <- df[, c("R_geometry")]
+    r_geometry <- sf::st_as_sf(r_geometry)
+    r_geometry_mt <- st_coordinates(r_geometry)
+
+    linestring <- sf::st_multilinestring(x = list(w_geometry_mt, r_geometry_mt))
+    linestring <- sf::st_sf(geom = st_sfc(linestring))
+    linestring <- sf::st_cast(linestring, "MULTILINESTRING")
+    st_crs(linestring) = 4326}
+
+  return(linestring)
+
+}

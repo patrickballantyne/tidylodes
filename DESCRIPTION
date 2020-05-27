@@ -11,14 +11,14 @@ Description: This package enables users to extract datasets directly from the US
     the recording of census geographies within them, but also converts these datasets to spatial formats that enable 
     spatial manipulation/analysis to be carried out.
 Depends: 
-    R (>=3.5.0)
+    R (>= 3.5.0)
 Imports:
-    data.table (>=1.12.2),
-    dplyr (>=0.8.5),
-    R.utils (>=2.6.0), 
-    sf (>=0.8.1), 
-    stringr (>=1.4.0),
-    tigris (>=0.9.4), 
+    data.table,
+    dplyr, 
+    R.utils,
+    sf, 
+    stringr, 
+    tigris, 
 VignetteBuilder: knitr
 License: CC0
 Encoding: UTF-8
