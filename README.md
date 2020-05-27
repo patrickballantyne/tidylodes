@@ -1,13 +1,10 @@
 ## README for tidylodes
 
-Welcome to tidylodes! In this README the following topics will be covered:
+Welcome to tidylodes! 
 
-  1. Introduction to the LODES database
-  2. Introduction to tidylodes
-  3. Installation of tidylodes
-  4. Using tidylodes - function examples, function help
-  5. Suggested applications - Choropleth maps with WAC/RAC data and OD Flow Maps
-  6. Contact Details
+"A package for extracting, processing and 'spatialising' data from the US Census Bureau's LODES database"
+
+---
 
 ## 1. LODES Introduction 
 
@@ -24,9 +21,7 @@ The database contains three different datasets:
 
 ## 2. Package Description: 
 
-*tidylodes* enables users to extract datasets directly from LODES at: https://lehd.ces.census.gov/data/lodes/. 
-
-Users of the package can download WAC, RAC and OD datasets for specific states and for specific years, directly to their PC for use locally.
+**tidylodes** enables users to extract datasets directly from LODES at: https://lehd.ces.census.gov/data/lodes/. Users of the package can download WAC, RAC and OD datasets for specific states and for specific years, directly to their PC for use locally.
 
 The package cleans the datasets and improves the recording of census geographies within them. The package also offers users the opportunity to convert these datasets into spatial formats for spatial exploration/manipulation/analysis. It is important to stress that the datasets downloaded with this package contain only information on workplace areas, residence areas or those with valid OD flows, thus not every census block is accounted for. 
 
@@ -34,7 +29,7 @@ The package cleans the datasets and improves the recording of census geographies
 
 ```{r}
 ## Install package directly from GitHub
-#devtools::install_github("patrickballantyne/tidylodes")
+devtools::install_github("patrickballantyne/tidylodes")
 ```
 
 
@@ -69,25 +64,18 @@ As an example, let's go through how to use the various functions specific to **W
 ```{r}
 ## Extract WAC data for Delaware, from 2013
 de_wac <- get_wac_data("de", "2013")
-de_wac[1:2, ]
 ```
 
 ```{r}
 ## Reduce the dimensionality of de_wac to focus on one job sector - e.g. Retail Trade
 de_wac_rt <- get_jobsector_wac(de_wac, job_code = "Retail_Trade",
                                job_proportion = T)
-de_wac_rt[1:2, ]
 ```
 
 ```{r echo=TRUE, message=TRUE, warning=FALSE, results='hide', fig.keep='all'}
 ## Convert the simple features
 de_wac_rt_sf <- get_wac_spatial(de_wac_rt)
 ```
-
-```{r}
-de_wac_rt_sf[1:2, ]
-```
-
 
 The **WAC** and **RAC** have identical functions, so the above steps can be repeated to obtain LODES data for Residential Areas (RAC) by substituting the wac function as below:
 
@@ -104,19 +92,16 @@ The **OD** datasets have different functions:
 ```{r}
 ## Download OD data for Delaware, from 2013
 de_od <- get_od_data("de", "2013", main = T)
-de_od[1:2, ]
 ```
 
 ```{r}
 ## Subset data to include only those rows of data where flows exceed a certain threshold
 de_od_sub <- get_od_subset(de_od, flow_threshold = 30)
-de_od_sub[1:2, ]
 ```
 
 ```{r warning=FALSE}
 ## Convert to a format that enables plotting of flow lines between census block centroids
 de_od_sub_sp <- get_od_spatial(de_od_sub)
-de_od_sub_sp[1:2, ]
 ```
 
 ## 5. Example Applications
@@ -152,33 +137,57 @@ tm_shape(area_of_interest) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
 
+  <p align="center">
+  <img width="600" height="600" src="figures/RAC_Choropleth.png">
+</p>
+
 
 **Plotting OD Flows**
 
-The OD datasets are even larger than the WAC and RAC datasets, and mapping these will also take considerable time. To reduce the size of the OD dataset, the get_od_subset() function is used below to extract only job flows of 30 or above, and these are then mapped.
+The OD datasets are even larger than the WAC and RAC datasets, and mapping these will also take considerable time. To reduce the size of the OD dataset, the get_od_subset() function is used below to extract only job flows of 16 or above, and these are then mapped using ggplot. 
+
+- For more information on ggplot() visit: https://cran.r-project.org/web/packages/ggplot2/index.html
 
 ```{r warning = FALSE}
 ## Get OD data for Delaware State
 de_od <- get_od_data("de", "2014", T)
-## Subset to flows over 50
-de_od_sub <- get_od_subset(de_od, flow_threshold = 10)
-```
-
-```{r }
-## Convert to spatial format
+## Get subset (flows > 20)
+de_od_sub <- get_od_subset(de_od, flow_threshold = 8)
+## Convert to spatial, for mapping
 de_od_sub_sp <- get_od_spatial(de_od_sub)
-## Plot all flows for Delaware State over 10 
+## Plot all flows for Delaware State over 10, using ggplot()
 library(ggplot2)
 ggplot(de_od_sub_sp) +
-  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = 'black') +
+  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = "white") +
   scale_alpha_continuous() +
-  theme(panel.background = element_rect(fill='gray', colour = 'gray'), panel.grid.major = element_blank(),
+  theme(panel.background = element_rect(fill='black', colour = 'black'), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
+        axis.title = element_blank(), axis.ticks = element_blank())
+```
+  <p align="center">
+  <img width="500" height="600" src="figures/Delaware_OD_Flows.png">
+</p>
+
+
+Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models, which could be implemented for each year of OD data, for example. 
+
+```{r }
+## Convert the entire OD dataset to spatial format for Delaware
+de_od_sp <- get_od_spatial(de_od)
+## Extract flows for one workplace area - this could be substituted for one county, tract or blockgroup?
+de_od_sp_aoi <- de_od_sp[de_od_sp$Workplace_Census_Block_Code == "100010405011044",]
+## Plot all flows for Delaware State over 10 
+ggplot(de_od_sp_aoi) +
+  geom_segment(aes(x = W_lat, y = W_lon, xend = R_lat, yend = R_lon), col = "white") +
+  scale_alpha_continuous() +
+  theme(panel.background = element_rect(fill='black', colour = 'black'), panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_blank(), axis.text = element_blank(), 
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
 
-
-
+  <p align="center">
+  <img width="500" height="600" src="figures/Delaware_OD_Flows_OneBlock.png">
+</p>
 
 
 ## 6. Contact Details 
