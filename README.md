@@ -154,7 +154,7 @@ tm_shape(area_of_interest) +
   tm_layout(legend.outside = T, frame = FALSE) 
 ```
    <p align="center">
-  <img width="450" height="450" src="figures/RAC_Choropleth.png">
+  <img width="300" height="300" src="figures/RAC_Choropleth.png">
 </p>
 
 **Plotting OD Flows**
@@ -180,7 +180,7 @@ ggplot(de_od_sub_sp) +
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
    <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_ggplot.png">
+  <img width="300" height="300" src="figures/Delaware_OD_ggplot.png">
 </p>
 
 Another interesting use case of the OD datasets is in extracting and mapping flows of jobs for one workplace area. This lends itself to applications in various modelling strategies such as spatial interaction models.
@@ -199,7 +199,7 @@ ggplot(de_od_sp_aoi) +
         axis.title = element_blank(), axis.ticks = element_blank())
 ```
    <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_OneBlock.png">
+  <img width="300" height="300" src="figures/Delaware_OD_OneBlock.png">
 </p>
 
 However, it would make more sense for plotting of the OD data to be able to use tmap, to enable supporting layers (polygons, basemaps) to be incorporated. To do this, the lines parameter in the get_od_data() function can be set to T, which will instead return a multilinestring object that can be plotted much easier. See below:
@@ -223,7 +223,7 @@ tm_shape(de_lines) +
   tm_lines()
 ```
    <p align="center">
-  <img width="850" height="850" src="figures/Delaware_OD_tmap.png">
+  <img width="300" height="300" src="figures/Delaware_OD_tmap.png">
 </p>
 
 So for plotting of the lines only, this option is the best! Especially when you integrate tm_lines() with other features, see below:
@@ -239,7 +239,7 @@ tm_shape(de_tracts) +
   tm_layout(frame = F)
 ```
    <p align="center">
-  <img width="600" height="600" src="figures/Delaware_OD_tmap_tigris.png">
+  <img width="300" height="300" src="figures/Delaware_OD_tmap_tigris.png">
 </p>
 
 So using the linestrings makes it very easy to plot the OD flows, and create effective visualisations by integrating other spatial features. However, always keep in mind that setting (lines = T) will only return the multilinestring object, not the OD data itself. 
