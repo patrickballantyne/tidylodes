@@ -226,7 +226,7 @@ tm_shape(de_lines) +
 
 
    <p align="left">
-  <img width="600" height="600" src="figures/Delaware_OD_tmap.png">
+  <img width="600" height="600" src="figures/Delaware_OD_tmap_new.png">
 </p>
 
 
@@ -249,7 +249,7 @@ tm_shape(de_tracts) +
 
 
    <p align="left">
-  <img width="600" height="600" src="figures/Delaware_OD_tmap_tigris.png">
+  <img width="600" height="600" src="figures/Delaware_OD_tigris_new.png">
 </p>
 
 
