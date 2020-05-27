@@ -226,7 +226,7 @@ tm_shape(de_lines) +
 
 
    <p align="left">
-  <img width="600" height="600" src="figures/Delaware_OD_tmap_new.png">
+  <img width="600" height="600" src="figures/Delaware_OD_ggplot_new.png">
 </p>
 
 
