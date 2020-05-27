@@ -222,9 +222,15 @@ Now that the OD data has been converted to a multilinestring format, it can be p
 tm_shape(de_lines) +
   tm_lines()
 ```
+
+
+
    <p align="center">
   <img width="300" height="300" src="figures/Delaware_OD_tmap.png">
 </p>
+
+
+
 
 So for plotting of the lines only, this option is the best! Especially when you integrate tm_lines() with other features, see below:
 
@@ -238,9 +244,19 @@ tm_shape(de_tracts) +
   tm_lines(col = "black", alpha = 0.75) +
   tm_layout(frame = F)
 ```
+
+
+
+
    <p align="center">
   <img width="300" height="300" src="figures/Delaware_OD_tmap_tigris.png">
 </p>
+
+
+
+
+
+
 
 So using the linestrings makes it very easy to plot the OD flows, and create effective visualisations by integrating other spatial features. However, always keep in mind that setting (lines = T) will only return the multilinestring object, not the OD data itself. 
 
